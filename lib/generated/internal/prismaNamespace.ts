@@ -391,7 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Problem: 'Problem'
+  Problem: 'Problem',
+  ProblemsSolved: 'ProblemsSolved'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "problem"
+    modelProps: "user" | "problem" | "problemsSolved"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -559,6 +560,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProblemsSolved: {
+      payload: Prisma.$ProblemsSolvedPayload<ExtArgs>
+      fields: Prisma.ProblemsSolvedFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProblemsSolvedFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProblemsSolvedFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        findFirst: {
+          args: Prisma.ProblemsSolvedFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProblemsSolvedFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        findMany: {
+          args: Prisma.ProblemsSolvedFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>[]
+        }
+        create: {
+          args: Prisma.ProblemsSolvedCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        createMany: {
+          args: Prisma.ProblemsSolvedCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProblemsSolvedCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>[]
+        }
+        delete: {
+          args: Prisma.ProblemsSolvedDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        update: {
+          args: Prisma.ProblemsSolvedUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProblemsSolvedDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProblemsSolvedUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProblemsSolvedUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProblemsSolvedUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProblemsSolvedPayload>
+        }
+        aggregate: {
+          args: Prisma.ProblemsSolvedAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProblemsSolved>
+        }
+        groupBy: {
+          args: Prisma.ProblemsSolvedGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProblemsSolvedGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProblemsSolvedCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProblemsSolvedCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -632,6 +707,16 @@ export const ProblemScalarFieldEnum = {
 } as const
 
 export type ProblemScalarFieldEnum = (typeof ProblemScalarFieldEnum)[keyof typeof ProblemScalarFieldEnum]
+
+
+export const ProblemsSolvedScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProblemsSolvedScalarFieldEnum = (typeof ProblemsSolvedScalarFieldEnum)[keyof typeof ProblemsSolvedScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -852,6 +937,7 @@ export interface PrismaClientOptions {
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   problem?: Prisma.ProblemOmit
+  problemsSolved?: Prisma.ProblemsSolvedOmit
 }
 
 /* Types for Logging */
