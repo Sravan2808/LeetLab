@@ -54,3 +54,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Problem = Prisma.ProblemModel
+/**
+ * Model ProblemsSolved
+ * 
+ */
+export type ProblemsSolved = Prisma.ProblemsSolvedModel
