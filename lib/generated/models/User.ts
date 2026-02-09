@@ -216,6 +216,7 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   problems?: Prisma.ProblemListRelationFilter
   solvedProblems?: Prisma.ProblemsSolvedListRelationFilter
+  submissions?: Prisma.SubmissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -230,6 +231,7 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   problems?: Prisma.ProblemOrderByRelationAggregateInput
   solvedProblems?: Prisma.ProblemsSolvedOrderByRelationAggregateInput
+  submissions?: Prisma.SubmissionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -247,6 +249,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   problems?: Prisma.ProblemListRelationFilter
   solvedProblems?: Prisma.ProblemsSolvedListRelationFilter
+  submissions?: Prisma.SubmissionListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -291,6 +294,7 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   problems?: Prisma.ProblemCreateNestedManyWithoutUserInput
   solvedProblems?: Prisma.ProblemsSolvedCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -305,6 +309,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   problems?: Prisma.ProblemUncheckedCreateNestedManyWithoutUserInput
   solvedProblems?: Prisma.ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +324,7 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   problems?: Prisma.ProblemUpdateManyWithoutUserNestedInput
   solvedProblems?: Prisma.ProblemsSolvedUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -333,6 +339,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   problems?: Prisma.ProblemUncheckedUpdateManyWithoutUserNestedInput
   solvedProblems?: Prisma.ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -442,6 +449,20 @@ export type UserUpdateOneRequiredWithoutProblemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProblemsInput, Prisma.UserUpdateWithoutProblemsInput>, Prisma.UserUncheckedUpdateWithoutProblemsInput>
 }
 
+export type UserCreateNestedOneWithoutSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubmissionsInput, Prisma.UserUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubmissionsInput, Prisma.UserUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubmissionsInput
+  upsert?: Prisma.UserUpsertWithoutSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubmissionsInput, Prisma.UserUpdateWithoutSubmissionsInput>, Prisma.UserUncheckedUpdateWithoutSubmissionsInput>
+}
+
 export type UserCreateNestedOneWithoutSolvedProblemsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSolvedProblemsInput, Prisma.UserUncheckedCreateWithoutSolvedProblemsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSolvedProblemsInput
@@ -467,6 +488,7 @@ export type UserCreateWithoutProblemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   solvedProblems?: Prisma.ProblemsSolvedCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProblemsInput = {
@@ -480,6 +502,7 @@ export type UserUncheckedCreateWithoutProblemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   solvedProblems?: Prisma.ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProblemsInput = {
@@ -509,6 +532,7 @@ export type UserUpdateWithoutProblemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   solvedProblems?: Prisma.ProblemsSolvedUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProblemsInput = {
@@ -521,6 +545,79 @@ export type UserUncheckedUpdateWithoutProblemsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  solvedProblems?: Prisma.ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSubmissionsInput = {
+  id?: string
+  clerkId: string
+  email: string
+  role?: $Enums.UserRole
+  firstName?: string | null
+  lastName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  problems?: Prisma.ProblemCreateNestedManyWithoutUserInput
+  solvedProblems?: Prisma.ProblemsSolvedCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSubmissionsInput = {
+  id?: string
+  clerkId: string
+  email: string
+  role?: $Enums.UserRole
+  firstName?: string | null
+  lastName?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  problems?: Prisma.ProblemUncheckedCreateNestedManyWithoutUserInput
+  solvedProblems?: Prisma.ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSubmissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubmissionsInput, Prisma.UserUncheckedCreateWithoutSubmissionsInput>
+}
+
+export type UserUpsertWithoutSubmissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubmissionsInput, Prisma.UserUncheckedUpdateWithoutSubmissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubmissionsInput, Prisma.UserUncheckedCreateWithoutSubmissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubmissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubmissionsInput, Prisma.UserUncheckedUpdateWithoutSubmissionsInput>
+}
+
+export type UserUpdateWithoutSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  problems?: Prisma.ProblemUpdateManyWithoutUserNestedInput
+  solvedProblems?: Prisma.ProblemsSolvedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  problems?: Prisma.ProblemUncheckedUpdateManyWithoutUserNestedInput
   solvedProblems?: Prisma.ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -535,6 +632,7 @@ export type UserCreateWithoutSolvedProblemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   problems?: Prisma.ProblemCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSolvedProblemsInput = {
@@ -548,6 +646,7 @@ export type UserUncheckedCreateWithoutSolvedProblemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   problems?: Prisma.ProblemUncheckedCreateNestedManyWithoutUserInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSolvedProblemsInput = {
@@ -577,6 +676,7 @@ export type UserUpdateWithoutSolvedProblemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   problems?: Prisma.ProblemUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSolvedProblemsInput = {
@@ -590,6 +690,7 @@ export type UserUncheckedUpdateWithoutSolvedProblemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   problems?: Prisma.ProblemUncheckedUpdateManyWithoutUserNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -600,11 +701,13 @@ export type UserUncheckedUpdateWithoutSolvedProblemsInput = {
 export type UserCountOutputType = {
   problems: number
   solvedProblems: number
+  submissions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   problems?: boolean | UserCountOutputTypeCountProblemsArgs
   solvedProblems?: boolean | UserCountOutputTypeCountSolvedProblemsArgs
+  submissions?: boolean | UserCountOutputTypeCountSubmissionsArgs
 }
 
 /**
@@ -631,6 +734,13 @@ export type UserCountOutputTypeCountSolvedProblemsArgs<ExtArgs extends runtime.T
   where?: Prisma.ProblemsSolvedWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubmissionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -644,6 +754,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   problems?: boolean | Prisma.User$problemsArgs<ExtArgs>
   solvedProblems?: boolean | Prisma.User$solvedProblemsArgs<ExtArgs>
+  submissions?: boolean | Prisma.User$submissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -687,6 +798,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   problems?: boolean | Prisma.User$problemsArgs<ExtArgs>
   solvedProblems?: boolean | Prisma.User$solvedProblemsArgs<ExtArgs>
+  submissions?: boolean | Prisma.User$submissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -697,6 +809,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     problems: Prisma.$ProblemPayload<ExtArgs>[]
     solvedProblems: Prisma.$ProblemsSolvedPayload<ExtArgs>[]
+    submissions: Prisma.$SubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1104,6 +1217,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   problems<T extends Prisma.User$problemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$problemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   solvedProblems<T extends Prisma.User$solvedProblemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$solvedProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProblemsSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  submissions<T extends Prisma.User$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1575,6 +1689,30 @@ export type User$solvedProblemsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ProblemsSolvedScalarFieldEnum | Prisma.ProblemsSolvedScalarFieldEnum[]
+}
+
+/**
+ * User.submissions
+ */
+export type User$submissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Submission
+   */
+  select?: Prisma.SubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Submission
+   */
+  omit?: Prisma.SubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubmissionInclude<ExtArgs> | null
+  where?: Prisma.SubmissionWhereInput
+  orderBy?: Prisma.SubmissionOrderByWithRelationInput | Prisma.SubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.SubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubmissionScalarFieldEnum | Prisma.SubmissionScalarFieldEnum[]
 }
 
 /**
