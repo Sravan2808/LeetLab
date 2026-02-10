@@ -41,6 +41,8 @@ import Link from "next/link";
 import { executeCode, getProblemById } from "@/modules/problems/actions";
 import { SubmissionDetails } from "@/modules/problems/components/submission-details";
 import { TestCaseTable } from "@/modules/problems/components/test-case-table";
+import { SubmissionHistory } from "@/modules/problems/components/submission-history";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 const getDifficultyColor = (difficulty) => {
   switch (difficulty) {
@@ -157,7 +159,7 @@ const ProblemIdPage = ({ params }) => {
               ))}
             </div>
           </div>
-          <ModeToggle />
+          <AnimatedThemeToggler />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
@@ -248,7 +250,7 @@ const ProblemIdPage = ({ params }) => {
                   <TabsContent value="submissions" className="p-6">
                     <div className="text-center py-8 text-muted-foreground">
                       <p>Submission History</p>
-                      {/* <SubmissionHistory submissions={submissionHistory} /> */}
+                      <SubmissionHistory submissions={submissionHistory} />
                     </div>
                   </TabsContent>
                   <TabsContent value="editorial" className="p-6">
