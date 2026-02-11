@@ -42,3 +42,13 @@ export type TestCaseResult = Prisma.TestCaseResultModel
  * 
  */
 export type ProblemsSolved = Prisma.ProblemsSolvedModel
+/**
+ * Model Playlist
+ * 
+ */
+export type Playlist = Prisma.PlaylistModel
+/**
+ * Model ProblemInPlaylist
+ * 
+ */
+export type ProblemInPlaylist = Prisma.ProblemInPlaylistModel
