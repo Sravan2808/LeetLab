@@ -45,7 +45,7 @@ const problemSchema = z.object({
       z.object({
         input: z.string().min(1, "Input is required"),
         output: z.string().min(1, "Output is required"),
-      })
+      }),
     )
     .min(1, "At least one test case is required"),
   examples: z.object({
@@ -187,63 +187,73 @@ class Main {
 }`,
   },
   referenceSolutions: {
-    JAVASCRIPT: `/**
-* @param {number} n
-* @return {number}
-*/
+    JAVASCRIPT: `
 function climbStairs(n) {
-// Base cases
-if (n <= 2) {
-  return n;
+  if (n <= 2) return n;
+  let dp = new Array(n + 1);
+  dp[1] = 1;
+  dp[2] = 2;
+  for (let i = 3; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+  return dp[n];
 }
 
-// Dynamic programming approach
-let dp = new Array(n + 1);
-dp[1] = 1;
-dp[2] = 2;
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
 
-for (let i = 3; i <= n; i++) {
-  dp[i] = dp[i - 1] + dp[i - 2];
-}
+rl.on('line', (line) => {
+  const n = parseInt(line.trim());
+  console.log(climbStairs(n));
+  rl.close();
+});
+`,
 
-return dp[n];
-}`,
-    PYTHON: `class Solution:
-  def climbStairs(self, n: int) -> int:
-      # Base cases
-      if n <= 2:
-          return n
-      
-      # Dynamic programming approach
-      dp = [0] * (n + 1)
-      dp[1] = 1
-      dp[2] = 2
-      
-      for i in range(3, n + 1):
-          dp[i] = dp[i - 1] + dp[i - 2]
-      
-      return dp[n]`,
-    JAVA: `import java.util.Scanner;
+    PYTHON: `
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+        dp = [0]*(n+1)
+        dp[1]=1
+        dp[2]=2
+        for i in range(3,n+1):
+            dp[i]=dp[i-1]+dp[i-2]
+        return dp[n]
+
+if __name__ == "__main__":
+    import sys
+    n = int(sys.stdin.readline().strip())
+    sol = Solution()
+    print(sol.climbStairs(n))
+`,
+
+    JAVA: `
+import java.util.*;
 
 class Main {
-  public int climbStairs(int n) {
-      // Base cases
-      if (n <= 2) {
-          return n;
-      }
-      
-      // Dynamic programming approach
-      int[] dp = new int[n + 1];
-      dp[1] = 1;
-      dp[2] = 2;
-      
-      for (int i = 3; i <= n; i++) {
-          dp[i] = dp[i - 1] + dp[i - 2];
-      }
-      
-      return dp[n];
-  }
-}`,
+    public static int climbStairs(int n){
+        if(n<=2) return n;
+        int[] dp=new int[n+1];
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=3;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        System.out.println(climbStairs(n));
+    }
+}
+`,
   },
 };
 
@@ -487,7 +497,7 @@ const CodeEditor = ({ value, onChange, language = "javascript" }) => {
 const CreateProblemForm = () => {
   const router = useRouter();
   const [sampleType, setSampleType] = useState("DP");
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(problemSchema),
@@ -530,7 +540,7 @@ const CreateProblemForm = () => {
     name: "testCases",
   });
 
-   const {
+  const {
     fields: tagFields,
     append: appendTag,
     remove: removeTag,
@@ -540,35 +550,37 @@ const CreateProblemForm = () => {
     name: "tags",
   });
 
-  const onSubmit = async(values)=>{
+  const onSubmit = async (values) => {
     try {
-        setIsloading(true)
-        const response = await fetch("/api/create-problem",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(values)
-        })
-        toast.success(response.message || "Problem created successfully")
-        router.push("/problems")
+      setIsLoading(true);
+      const response = await fetch("/api/create-problem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create problem");
+      }
+      toast.success(response.message || "Problem created successfully");
+      router.push("/problems");
     } catch (error) {
-          console.error("Error creating problem:", error);
+      console.error("Error creating problem:", error);
       toast.error(error.message || "Failed to create problem");
+    } finally {
+      setIsLoading(false);
     }
-    finally{
-         setIsLoading(false);
-    }
-  }
+  };
 
-   const loadSampleData = () => {
+  const loadSampleData = () => {
     const sampleData = sampleType === "DP" ? sampledpData : sampleStringProblem;
     replaceTags(sampleData.tags.map((tag) => tag));
     replaceTestCases(sampleData.testCases.map((tc) => tc));
     reset(sampleData);
   };
 
-
   return (
-      <div className="container mx-auto py-8 px-4 max-w-7xl">
+    <div className="container mx-auto py-8 px-4 max-w-7xl">
       <Card className="shadow-xl">
         <CardHeader className="pb-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -1008,7 +1020,7 @@ const CreateProblemForm = () => {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 };
 
 export default CreateProblemForm;
